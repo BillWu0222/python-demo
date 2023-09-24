@@ -11,8 +11,8 @@ df = pd.read_csv("recent-grads.csv")
 
 # 檢視[排名1至173的科系]的[收入]變化
 # plot預設是畫折線圖
-#df.plot(x="Rank", y=["P25th", "Median", "P75th"])
-#plt.show()
+df.plot(x="Rank", y=["P25th", "Median", "P75th"])
+plt.show()
 
 # 檢視[系所收入中位數]與[失業人數比例]的關係
 # 將 plot 裡的 kind 參數設為 scatter 就能畫出散佈圖
@@ -20,5 +20,19 @@ df.plot(x="Median", y="Unemployment_rate", kind="scatter")
 #df.plot(x="Median", y="Unemployment_rate")
 plt.show()
 
-rank=df.sort_values(by="Median", ascending=False).head()
-print(rank)
+# rank=df.sort_values(by="Median", ascending=False).head()
+# print(rank)
+
+# 檢視[收入中位數超過6萬的科系]，在[收入]上的差異
+top_medians = df[df["Median"] > 60000].sort_values("Median")
+
+top_medians.plot(x="Major", y=["P25th", "Median", "P75th"], kind="bar")
+plt.show()
+
+# 檢視[不同科系類群]在[收入中位數]上的差異
+
+# 將 plot 裡的 kind 參數設為 barh 就能畫出水平長條圖
+cat_medians = df.groupby("Major_category")["Median"].mean().sort_values()
+
+cat_medians.plot(kind="barh", fontsize=10)
+plt.show()

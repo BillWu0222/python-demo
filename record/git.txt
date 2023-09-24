@@ -1,0 +1,48 @@
+echo "# python-demo" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/BillWu0222/python-demo.git
+git push -u origin main
+
+push an existing repository from the command line
+git remote add origin https://github.com/BillWu0222/python-demo.git
+git branch -M main
+git push -u origin main
+
+git reset index.html -> 取消加入暫存區的檔案index.html
+git add *.html -> 加入任何html 檔案到暫存區
+git add . -> 加入所有檔案到暫存區 
+git commit -m "add index.html" -> 將暫存區的檔案commit 到本地檔案庫 （－ｍ 幫commit 做個訊息記錄）
+git add -u 前提是這隻檔案有先被commit過，可以用-u去加入已經有修改過的檔案到暫存區
+git commit -am "update" -> 被追蹤修改過的檔案commit到本地檔案庫，但不包含新增的檔案 （前提是這隻檔案有先被commit過）
+git commit --amend -m "modify" -> 修改最後一次commit 的內容 
+git log 可以看commit的紀錄 
+.gitignore 排除被追蹤的檔案 
+
+Head 工作目錄比對的基礎
+master 預設的分支名稱
+
+# 10064 blob 一般檔案
+# 040000 tree 資料夾
+
+git add -p 選擇部分內容加入暫存區（需有commit過才有效）s 切割更小區塊 y 加入這個區塊至暫存區
+git checkout index.html 復原HEAD的index.html(修改過的檔案還原) 進入暫存區的檔案不還原
+git revert commit -n 復原commit 做的事情，不會自動commit一個新的
+git reflog 查看HEAD移動的歷史紀錄
+git reset --mixed 保持工作目錄不變，清除暫存區
+
+git branch dev -d 刪除dev分支
+git checkout dev checkout會將HEAD移動到dev分支 可以在分支上做其他事情 
+git checkout -b dev 同時幫你開分支又幫你切換過去 
+
+git merge dev 在目前的分支上合併dev分支
+git merge --no-ff dev 不使用快進(fast-forward)合併分支，會產生一個新的節點 不使用快進：一定產生commit 
+
+git rebase master 把目前分支重寫到master 如果有衝突一樣先編修好git add加入 再透過git rebase --continue 完成
+
+git cherry-pick commit 擷取某個commit 套用在目前分支上
+
+git pull pull = fetch + merge 拉下紀錄並同時自動merge（這時候就會改變工作目錄,HEAD,分支位置）
+

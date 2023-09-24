@@ -1,0 +1,69 @@
+// .find 查看資料
+db.getCollection('mango-tutorial').find()
+
+// .find(condition) 有條件的資料
+db.getCollection('mango-tutorial').find({
+    "category" : "政治",
+    "score" : {
+        "$gte" : 9.5 // 分數大於等於9.5
+    }
+})
+db.getCollection('mango-tutorial').find({
+    "category" : "政治",
+    "score" : {
+        "$lte" : 9.5 // 分數小於等於9.5
+    }
+})
+
+db.getCollection('mango-tutorial').find({
+    " age " : {
+        "$exists" :true //age 這個欄位存在的話就顯示出來
+    }
+ }
+)
+
+// .insert 新增一筆資料
+db.getCollection('mango-tutorial').insert({ "today" : " 星期六” , "whether" : " sunny "})
+
+
+{
+    "_id " : ObjectId("61d925d53hii566445), // ObjectId 是 primary key，可由MongoDB自動產生 
+    "dramaID" : " 1002 " ,
+    "category" : " 殭屍 " ,
+    "name" : "屍戰朝鮮",
+    "score" : 9.0
+}
+// 搜尋全部 + 顯示{category, name}欄位 , _id 不顯示 
+==> .find(條件 ,欄位顯示) 
+db.getCollection('mango-tutorial').find({},{"category" : 1, "name" : 1 , "_id " : 0  })
+
+//更新 _id = 1234567 的資料，欄位為 score =8.1 , category=QQQ
+db.getCollection('mango-tutorial').updateOne(
+    {"_id" : "1234567 "} ,
+    {"$set": {
+            "score" : 8.1,
+            "category":QQQ
+        } 
+    }
+)
+
+//更新 category = 政治 多組資料，欄位為 age =100 math_score=123 , message=卡卡的
+db.getCollection('mango-tutorial').updateMany(
+    {"category" : "政治 "} ,
+    {"$set": {
+            "age" : 100,
+            "math_score":123,
+            "message" : 卡卡的
+        } 
+    }
+)
+// 有欄位 -> update value 值 ; 沒有欄位 -> 新增 key-value
+
+// 刪除一筆
+db.getCollection('mango-tutorial').deleteOne(
+    {"name" : "kevin "} 
+)
+// 刪除多筆
+db.getCollection('mango-tutorial').deleteMany(
+    {"name" : "kevin "} 
+)

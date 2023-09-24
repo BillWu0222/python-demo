@@ -73,7 +73,7 @@ loss, accuracy = model.evaluate(x_test, y_test)
 print("測試資料集的準確度={:.2f}".format(accuracy))
 
 y_pred_prob = model.predict(x_test)
-y_pred = np.argmax(y_pred_prob, axis=1) # 根据最高概率选择类别
+y_pred = np.argmax(y_pred_prob, axis=1) # 根据最高概率选择類別
 
 print(y_pred)
 
